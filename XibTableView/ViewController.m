@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "XibTableViewCell.h"
 @interface ViewController ()
 
 @end
@@ -25,5 +25,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    XibTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    if(!cell){
+        //very imp line because nib identifire is not a string
+        
+        [tableView registerNib:[UINib nibWithNibName:@"XibTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    }
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 6;
+}
 
 @end
