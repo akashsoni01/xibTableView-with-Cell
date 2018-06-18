@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 
@@ -24,22 +26,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     XibTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    if(!cell){
+    if(cell){
         //very imp line because nib identifire is not a string
         
         [tableView registerNib:[UINib nibWithNibName:@"XibTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
         cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        cell.lbl1.text = @"hi";
+        
     }
-    
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 6;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
 @end
